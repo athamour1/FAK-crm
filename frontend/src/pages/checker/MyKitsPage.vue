@@ -31,9 +31,7 @@
         :key="kit.id"
         class="col-12 col-sm-6 col-md-4"
       >
-        <q-card flat bordered class="kit-card cursor-pointer full-height"
-          @click="goInspect(kit.id)"
-        >
+        <q-card flat bordered class="kit-card full-height">
           <!-- Card header -->
           <q-card-section class="q-pb-sm">
             <div class="row items-start no-wrap">
@@ -132,8 +130,8 @@
             />
             <q-space />
             <q-btn
-              flat color="primary" icon="fact_check" label="Inspect"
-              @click.stop="goInspect(kit.id)"
+              flat color="primary" icon="qr_code_scanner" label="Open Kit"
+              @click.stop="router.push({ name: 'kit-landing', params: { id: kit.id } })"
             />
           </q-card-actions>
         </q-card>
@@ -168,9 +166,6 @@ function expiringSoonCount(kit: Kit): number {
   }).length;
 }
 
-function goInspect(kitId: string) {
-  void router.push({ name: 'kit-inspect', params: { id: kitId } });
-}
 
 onMounted(async () => {
   loading.value = true;
@@ -188,10 +183,5 @@ onMounted(async () => {
 <style scoped lang="css">
 .kit-card {
   border-radius: 12px;
-  transition: box-shadow 0.2s, transform 0.15s;
-}
-.kit-card:hover {
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
 }
 </style>
