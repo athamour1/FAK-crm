@@ -1,10 +1,10 @@
 <template>
   <q-page padding>
-    <div class="text-h5 q-mb-lg">
+    <div class="text-h5 q-mb-md">
       <q-icon name="warning" class="q-mr-sm" color="negative" />My Incident Reports
     </div>
 
-    <q-card flat bordered>
+    <q-card flat bordered style="overflow: hidden;">
       <q-table
         :rows="reports" :columns="columns" row-key="id"
         :loading="loading" flat :pagination="{ rowsPerPage: 20 }"
@@ -12,24 +12,21 @@
         <template #body="props">
           <q-tr :props="props">
             <q-td auto-width>
-              <q-btn flat dense round size="sm"
+              <q-btn no-caps rounded flat dense round size="sm"
                 :icon="props.expand ? 'expand_less' : 'expand_more'"
                 @click="props.expand = !props.expand"
               />
             </q-td>
-            <q-td v-for="col in props.cols" :key="col.name" :props="props">
-              <template v-if="col.name === 'createdAt'">{{ formatDate(col.value as string) }}</template>
-              <template v-else-if="col.name === 'kit'">{{ props.row.kit.name }}</template>
-              <template v-else-if="col.name === 'itemCount'">
-                <q-badge color="negative" :label="props.row.items.length" />
-              </template>
-              <template v-else>{{ col.value }}</template>
+            <q-td key="createdAt" :props="props">{{ formatDate(props.row.createdAt) }}</q-td>
+            <q-td key="kit" :props="props">{{ props.row.kit.name }}</q-td>
+            <q-td key="itemCount" :props="props">
+              <q-badge color="negative" :label="props.row.items.length" />
             </q-td>
           </q-tr>
 
           <q-tr v-show="props.expand" :props="props" :class="$q.dark.isActive ? 'bg-red-10' : 'bg-red-1'">
-            <q-td colspan="100%">
-              <div class="q-pa-sm">
+            <q-td colspan="100%" style="padding: 0;">
+              <div class="q-pa-sm" style="max-height: 260px; overflow-y: auto;">
                 <div v-if="props.row.description" class="q-mb-sm text-caption text-grey-8">
                   <strong>Description:</strong> {{ props.row.description }}
                 </div>
@@ -82,8 +79,8 @@ function formatDate(iso: string) {
 }
 
 const columns: QTableColumn[] = [
-  { name: 'expand',    label: '',      field: 'id',        align: 'center' },
-  { name: 'createdAt', label: 'Date',  field: 'createdAt', sortable: true, align: 'left' },
+  { name: 'expand',    label: '',      field: () => '',    align: 'center', style: 'width: 48px' },
+  { name: 'createdAt', label: 'Date',  field: 'createdAt', sortable: true,  align: 'left' },
   { name: 'kit',       label: 'Kit',   field: 'kit',       align: 'left' },
   { name: 'itemCount', label: 'Items', field: 'items',     align: 'center' },
 ];

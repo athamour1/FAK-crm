@@ -53,7 +53,6 @@
           <q-banner
             v-if="authStore.error"
             dense
-            rounded
             class="bg-negative text-white text-caption"
           >
             <template #avatar>
@@ -62,7 +61,7 @@
             {{ authStore.error }}
           </q-banner>
 
-          <q-btn
+          <q-btn no-caps rounded
             type="submit"
             label="Sign in"
             color="primary"
@@ -110,7 +109,7 @@ async function handleLogin() {
 <style scoped lang="css">
 .login-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%);
+  background: linear-gradient(135deg, #c0645e 0%, #7a2e2e 100%);
 }
 
 .login-card {

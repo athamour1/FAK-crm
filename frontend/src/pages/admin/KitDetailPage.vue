@@ -5,7 +5,7 @@
     <div class="q-mb-md">
       <!-- Title row -->
       <div class="row items-center q-mb-sm">
-        <q-btn flat round dense icon="arrow_back" :to="authStore.isAdmin ? '/admin/kits' : '/my-kits'" class="q-mr-sm" />
+        <q-btn no-caps rounded flat round dense icon="arrow_back" :to="authStore.isAdmin ? '/admin/kits' : '/my-kits'" class="q-mr-sm" />
         <div>
           <div class="text-h5" v-if="kit">{{ kit.name }}</div>
           <q-skeleton v-else type="text" width="200px" />
@@ -21,20 +21,19 @@
       </div>
       <!-- Action buttons row -->
       <div class="row q-gutter-sm">
-        <q-btn
+        <q-btn no-caps rounded
           v-if="authStore.isChecker"
           color="teal" icon="fact_check" label="Start Inspection" unelevated
           :to="{ name: 'kit-inspect', params: { id: kitId } }"
         />
-        <q-btn color="secondary" icon="upload_file" label="Import CSV" unelevated @click="openImport" />
-        <q-btn color="primary" icon="add" label="Add Item" unelevated @click="openAddItem" />
+        <q-btn no-caps rounded color="secondary" icon="upload_file" label="Import CSV" unelevated @click="openImport" />
+        <q-btn no-caps rounded color="primary" icon="add" label="Add Item" unelevated @click="openAddItem" />
       </div>
     </div>
 
     <!-- ── Expiry alert banner ───────────────────────────────────────────────── -->
     <q-banner
       v-if="!loading && alertCount > 0"
-      rounded
       :class="expiredCount > 0
         ? ($q.dark.isActive ? 'bg-red-9 text-red-2' : 'bg-red-1 text-red-9')
         : ($q.dark.isActive ? 'bg-orange-9 text-orange-2' : 'bg-orange-1 text-orange-9')"
@@ -102,9 +101,9 @@
               <!-- Actions -->
               <template v-else-if="col.name === 'actions'">
                 <div class="q-gutter-xs">
-                  <q-btn flat dense round icon="edit" color="primary" size="sm"
+                  <q-btn no-caps rounded flat dense round icon="edit" color="primary" size="sm"
                     @click="openEditItem(props.row)" />
-                  <q-btn flat dense round icon="delete" color="negative" size="sm"
+                  <q-btn no-caps rounded flat dense round icon="delete" color="negative" size="sm"
                     @click="confirmRemoveItem(props.row)" />
                 </div>
               </template>
@@ -120,7 +119,7 @@
       <q-card style="min-width: 420px">
         <q-card-section class="row items-center">
           <div class="text-h6">Add Item to Kit</div>
-          <q-space /><q-btn icon="close" flat round dense v-close-popup />
+          <q-space /><q-btn no-caps rounded icon="close" flat round dense v-close-popup />
         </q-card-section>
         <q-separator />
         <q-card-section>
@@ -139,8 +138,8 @@
           </q-form>
         </q-card-section>
         <q-card-actions align="right">
-          <q-btn flat label="Cancel" v-close-popup />
-          <q-btn unelevated color="primary" label="Add" :loading="saving" @click="saveAddItem" />
+          <q-btn no-caps rounded flat label="Cancel" v-close-popup />
+          <q-btn no-caps rounded unelevated color="primary" label="Add" :loading="saving" @click="saveAddItem" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -150,7 +149,7 @@
       <q-card style="min-width: 420px">
         <q-card-section class="row items-center">
           <div class="text-h6">Edit: {{ editItemTarget?.name }}</div>
-          <q-space /><q-btn icon="close" flat round dense v-close-popup />
+          <q-space /><q-btn no-caps rounded icon="close" flat round dense v-close-popup />
         </q-card-section>
         <q-separator />
         <q-card-section>
@@ -169,8 +168,8 @@
           </q-form>
         </q-card-section>
         <q-card-actions align="right">
-          <q-btn flat label="Cancel" v-close-popup />
-          <q-btn unelevated color="primary" label="Save" :loading="saving" @click="saveEditItem" />
+          <q-btn no-caps rounded flat label="Cancel" v-close-popup />
+          <q-btn no-caps rounded unelevated color="primary" label="Save" :loading="saving" @click="saveEditItem" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -180,7 +179,7 @@
       <q-card style="min-width: min(760px, 95vw)">
         <q-card-section class="row items-center">
           <div class="text-h6">Import Items from CSV / TSV</div>
-          <q-space /><q-btn icon="close" flat round dense v-close-popup @click="resetImport" />
+          <q-space /><q-btn no-caps rounded icon="close" flat round dense v-close-popup @click="resetImport" />
         </q-card-section>
         <q-separator />
 
@@ -202,7 +201,7 @@
             <span class="text-caption text-grey-6">or upload a file:</span>
             <input ref="fileInputRef" type="file" accept=".csv,.tsv,.txt" style="display:none"
               @change="onFileSelected" />
-            <q-btn flat dense size="sm" icon="attach_file" label="Choose file"
+            <q-btn no-caps rounded flat dense size="sm" icon="attach_file" label="Choose file"
               @click="(fileInputRef as HTMLInputElement)?.click()" />
           </div>
         </q-card-section>
@@ -253,11 +252,11 @@
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn flat label="Cancel" @click="resetImport" v-close-popup />
-          <q-btn v-if="importStep === 1" unelevated color="primary" label="Parse"
+          <q-btn no-caps rounded flat label="Cancel" @click="resetImport" v-close-popup />
+          <q-btn no-caps rounded v-if="importStep === 1" unelevated color="primary" label="Parse"
             :disable="!importRaw.trim()" @click="parseImport" />
-          <q-btn v-if="importStep === 2" flat label="Back" @click="importStep = 1" />
-          <q-btn v-if="importStep === 2" unelevated color="primary" label="Import"
+          <q-btn no-caps rounded v-if="importStep === 2" flat label="Back" @click="importStep = 1" />
+          <q-btn no-caps rounded v-if="importStep === 2" unelevated color="primary" label="Import"
             :disable="importRows.filter(r => !r._error).length === 0"
             @click="runImport" />
         </q-card-actions>

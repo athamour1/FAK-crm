@@ -3,7 +3,7 @@
     <div class="row items-center q-mb-md">
       <div class="text-h5"><q-icon name="people" class="q-mr-sm" />Users</div>
       <q-space />
-      <q-btn color="primary" icon="add" label="Add User" unelevated @click="openCreate" />
+      <q-btn no-caps rounded color="primary" icon="add" label="Add User" unelevated @click="openCreate" />
     </div>
 
     <q-card flat bordered>
@@ -24,8 +24,8 @@
         </template>
         <template #body-cell-actions="props">
           <q-td :props="props" class="q-gutter-xs">
-            <q-btn flat dense round icon="edit" color="primary" size="sm" @click="openEdit(props.row)" />
-            <q-btn flat dense round icon="delete" color="negative" size="sm" @click="confirmDelete(props.row)" />
+            <q-btn no-caps rounded flat dense round icon="edit" color="primary" size="sm" @click="openEdit(props.row)" />
+            <q-btn no-caps rounded flat dense round icon="delete" color="negative" size="sm" @click="confirmDelete(props.row)" />
           </q-td>
         </template>
       </q-table>
@@ -36,7 +36,7 @@
       <q-card style="min-width: 380px">
         <q-card-section class="row items-center">
           <div class="text-h6">{{ editTarget ? 'Edit User' : 'New User' }}</div>
-          <q-space /><q-btn icon="close" flat round dense v-close-popup />
+          <q-space /><q-btn no-caps rounded icon="close" flat round dense v-close-popup />
         </q-card-section>
         <q-separator />
         <q-card-section>
@@ -56,8 +56,8 @@
           </q-form>
         </q-card-section>
         <q-card-actions align="right">
-          <q-btn flat label="Cancel" v-close-popup />
-          <q-btn unelevated color="primary" :label="editTarget ? 'Save' : 'Create'"
+          <q-btn no-caps rounded flat label="Cancel" v-close-popup />
+          <q-btn no-caps rounded unelevated color="primary" :label="editTarget ? 'Save' : 'Create'"
             :loading="saving" @click="saveUser" />
         </q-card-actions>
       </q-card>

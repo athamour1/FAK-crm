@@ -5,14 +5,13 @@
 
       <div class="text-h2" style="opacity: 0.4">Oops. Nothing here...</div>
 
-      <q-btn
+      <q-btn no-caps rounded
         class="q-mt-xl"
         color="white"
         text-color="blue"
         unelevated
         to="/"
         label="Go Home"
-        no-caps
       />
     </div>
   </div>

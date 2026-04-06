@@ -41,7 +41,7 @@
         <template #body="props">
           <q-tr :props="props">
             <q-td auto-width>
-              <q-btn flat dense round
+              <q-btn no-caps rounded flat dense round
                 :icon="props.expand ? 'expand_less' : 'expand_more'"
                 size="sm"
                 @click="props.expand = !props.expand"
@@ -59,6 +59,9 @@
           <q-tr v-show="props.expand" :props="props" :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-1'">
             <q-td colspan="100%" style="padding: 0;">
               <div class="q-pa-sm" style="max-height: 260px; overflow-y: auto;">
+                <div v-if="props.row.notes" class="q-mb-sm text-caption text-grey-7">
+                  <strong>Inspector notes:</strong> {{ props.row.notes }}
+                </div>
                 <div class="text-subtitle2 q-mb-sm text-grey-7">
                   Items inspected — {{ props.row.items.length }} item(s)
                 </div>
@@ -82,9 +85,6 @@
                     </tr>
                   </tbody>
                 </q-markup-table>
-                <div v-if="props.row.notes" class="q-mt-sm text-caption text-grey-7">
-                  <strong>Inspector notes:</strong> {{ props.row.notes }}
-                </div>
               </div>
             </q-td>
           </q-tr>

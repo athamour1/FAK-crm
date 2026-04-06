@@ -4,7 +4,7 @@
       <q-card-section class="row items-center q-pb-none">
         <div class="text-h6">QR Code — {{ kitName }}</div>
         <q-space />
-        <q-btn icon="close" flat round dense v-close-popup />
+        <q-btn no-caps rounded icon="close" flat round dense v-close-popup />
       </q-card-section>
 
       <q-card-section>
@@ -13,7 +13,7 @@
       </q-card-section>
 
       <q-card-actions align="center" class="q-pb-md">
-        <q-btn unelevated color="primary" icon="download" label="Download PNG" @click="download" />
+        <q-btn no-caps rounded unelevated color="primary" icon="download" label="Download PNG" @click="download" />
       </q-card-actions>
     </q-card>
   </q-dialog>

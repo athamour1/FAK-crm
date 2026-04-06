@@ -4,12 +4,12 @@
     <!-- ── Top header ───────────────────────────────────────────────────────── -->
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
-        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleDrawer" />
+        <q-btn no-caps rounded flat dense round icon="menu" aria-label="Menu" @click="toggleDrawer" />
         <q-toolbar-title class="row items-center gap-sm">
           <q-icon name="medical_services" size="22px" class="q-mr-xs" />
           FAK CRM
         </q-toolbar-title>
-        <q-btn
+        <q-btn no-caps rounded
           flat dense round
           :icon="$q.dark.isActive ? 'light_mode' : 'dark_mode'"
           @click="toggleDark"
@@ -27,7 +27,7 @@
       :breakpoint="700"
       bordered
       :class="[$q.dark.isActive ? 'bg-grey-10' : 'bg-grey-1', 'column']"
-      style="overflow: hidden;"
+      style="overflow: hidden; height: calc(100vh - 50px); max-height: calc(100vh - 50px);"
     >
       <!-- Branding strip -->
       <!-- <div class="drawer-brand bg-primary text-white q-pa-md row items-center q-gutter-sm">
@@ -92,12 +92,12 @@
             />
           </div>
         </div>
-        <q-btn
+        <q-btn no-caps rounded
           flat color="primary" icon="manage_accounts" label="Profile Settings"
           class="full-width q-mb-xs" size="sm" align="left"
           to="/profile"
         />
-        <q-btn
+        <q-btn no-caps rounded
           unelevated color="primary" icon="logout" label="Sign Out"
           class="full-width" size="sm"
           @click="handleLogout"

@@ -22,7 +22,7 @@
       <div class="column q-gutter-md" style="width: min(400px, 92vw)">
 
         <!-- Incident Report -->
-        <q-btn
+        <q-btn no-caps rounded
           unelevated color="negative" size="xl"
           icon="warning" label="Incident Report"
           class="landing-btn"
@@ -32,7 +32,7 @@
         </q-btn>
 
         <!-- Kit Contents -->
-        <q-btn
+        <q-btn no-caps rounded
           unelevated color="primary" size="xl"
           icon="inventory_2" label="Kit Contents"
           class="landing-btn"
@@ -42,7 +42,7 @@
         />
 
         <!-- Start Inspection -->
-        <q-btn
+        <q-btn no-caps rounded
           unelevated color="teal" size="xl"
           icon="fact_check" label="Start Inspection"
           class="landing-btn"

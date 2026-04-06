@@ -1,5 +1,59 @@
 /* app global css */
 
+/* ── Drawer-safe scrolling layout ────────────────────────────────────────────
+   The header is position:fixed (Quasar elevated). Prevent the whole document
+   from scrolling; let only q-page-container scroll internally.               */
+
+.q-layout {
+  overflow: hidden !important;
+}
+
+.q-page-container {
+  position: fixed !important;
+  top: 50px !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  left: var(--q-drawer-width, 0px) !important;
+  overflow-y: auto !important;
+  padding-top: 0 !important;
+}
+
+/* On mobile the drawer is hidden — page fills full width */
+@media (max-width: 700px) {
+  .q-page-container {
+    left: 0 !important;
+  }
+}
+
+
+/* ── Global rounded UI ───────────────────────────────────────────────────────*/
+
+/* Cards */
+.q-card {
+  border-radius: 12px !important;
+}
+
+/* Dialogs */
+.q-dialog__inner>div {
+  border-radius: 16px !important;
+}
+
+/* Inputs & selects (outlined + filled variants) */
+.q-field--outlined .q-field__control,
+.q-field--filled .q-field__control {
+  border-radius: 8px !important;
+}
+
+/* Notifications */
+.q-notification {
+  border-radius: 10px !important;
+}
+
+/* Banners */
+.q-banner {
+  border-radius: 10px !important;
+}
+
 /* ── Dark mode scrollbars ────────────────────────────────────────────────────
    Chromium-based browsers support ::-webkit-scrollbar customisation.
    Firefox uses the `scrollbar-color` property.                               */

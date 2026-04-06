@@ -37,7 +37,7 @@
             </q-input>
 
             <div class="row justify-end q-mt-sm">
-              <q-btn
+              <q-btn no-caps rounded
                 unelevated color="primary"
                 label="Save Changes"
                 icon="save"
@@ -113,7 +113,7 @@
             </q-input>
 
             <div class="row justify-end q-mt-sm">
-              <q-btn
+              <q-btn no-caps rounded
                 unelevated color="primary"
                 label="Update Password"
                 icon="key"

@@ -6,7 +6,7 @@
 
       <!-- ── Header ─────────────────────────────────────────────────────────── -->
       <div class="row items-center q-mb-sm">
-        <q-btn flat round dense icon="arrow_back" :to="backRoute" class="q-mr-sm" />
+        <q-btn no-caps rounded flat round dense icon="arrow_back" :to="backRoute" class="q-mr-sm" />
         <div class="col">
           <div class="text-h5" v-if="kit">{{ kit.name }}</div>
           <q-skeleton v-else type="text" width="180px" />
@@ -21,7 +21,6 @@
       <!-- ── Expiry warning banner ─────────────────────────────────────────── -->
       <q-banner
         v-if="!loading && expiredItemCount > 0"
-        rounded
         :class="[$q.dark.isActive ? 'bg-red-9 text-red-2' : 'bg-red-1 text-red-9', 'q-mb-sm']"
       >
         <template #avatar><q-icon name="dangerous" /></template>
@@ -186,9 +185,9 @@
         <template #prepend><q-icon name="edit_note" /></template>
       </q-input>
       <div class="row items-center">
-        <q-btn flat label="Cancel" :to="backRoute" />
+        <q-btn no-caps rounded flat label="Cancel" :to="backRoute" />
         <q-space />
-        <q-btn
+        <q-btn no-caps rounded
           unelevated color="primary" size="md"
           icon="send" label="Submit Inspection"
           :loading="submitting"
@@ -206,7 +205,7 @@
         <div class="text-body2 text-grey-7 q-mb-lg">
           Your inspection for <strong>{{ kit?.name }}</strong> has been saved.
         </div>
-        <q-btn unelevated color="primary" label="Back to Kit" :to="backRoute" />
+        <q-btn no-caps rounded unelevated color="primary" label="Back to Dashboard" :to="backRoute" />
       </q-card>
     </q-dialog>
 

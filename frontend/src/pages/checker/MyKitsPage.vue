@@ -124,12 +124,12 @@
 
           <!-- Actions -->
           <q-card-actions class="q-gutter-xs">
-            <q-btn
+            <q-btn no-caps rounded
               flat color="grey-7" icon="open_in_new" label="Details"
               @click.stop="router.push({ name: 'my-kit-detail', params: { id: kit.id } })"
             />
             <q-space />
-            <q-btn
+            <q-btn no-caps rounded
               flat color="primary" icon="qr_code_scanner" label="Open Kit"
               @click.stop="router.push({ name: 'kit-landing', params: { id: kit.id } })"
             />

@@ -3,7 +3,7 @@
 
     <!-- Header -->
     <div class="row items-center q-mb-md">
-      <q-btn flat round dense icon="arrow_back" class="q-mr-sm"
+      <q-btn no-caps rounded flat round dense icon="arrow_back" class="q-mr-sm"
         :to="backRoute" />
       <div class="col">
         <div class="text-h5 text-negative row items-center">
@@ -86,17 +86,9 @@
           flat bordered class="q-mb-sm incident-item"
         >
           <q-card-section class="q-py-sm">
-            <div class="row items-center no-wrap q-gutter-sm">
-              <!-- Name -->
-              <div class="col">
-                <div class="text-weight-medium">{{ item.name }}</div>
-                <!-- <div class="text-caption text-grey-6">
-                  {{ item.category || '' }}{{ item.unit ? ` · ${item.unit}` : '' }}
-                  · Available: {{ item.quantity }}
-                </div> -->
-              </div>
-
-              <!-- Qty used -->
+            <!-- Row 1: name + qty + remove -->
+            <div class="row items-center no-wrap q-gutter-sm q-mb-xs">
+              <div class="col text-weight-medium">{{ item.name }}</div>
               <q-input
                 v-model.number="item.quantityUsed"
                 type="number" outlined dense label="Used"
@@ -105,18 +97,15 @@
                 :rules="[(v) => v >= 0 || '≥0']"
                 hide-bottom-space
               />
-
-              <!-- Notes -->
-              <q-input
-                v-model="item.notes"
-                outlined dense label="Notes" clearable
-                style="width: 160px"
-              />
-
-              <!-- Remove -->
-              <q-btn flat round dense icon="close" color="negative" size="sm"
+              <q-btn no-caps rounded flat round dense icon="close" color="negative" size="sm"
                 @click="incidentItems.splice(idx, 1)" />
             </div>
+            <!-- Row 2: notes paragraph -->
+            <q-input
+              v-model="item.notes"
+              outlined dense label="Notes" clearable
+              type="textarea" autogrow :rows="2"
+            />
           </q-card-section>
         </q-card>
       </div>
@@ -129,8 +118,8 @@
 
     <!-- ── Sticky submit bar ──────────────────────────────────────────────────── -->
     <div class="submit-bar" v-if="kit && !loading">
-      <q-btn flat label="Cancel" :to="backRoute" />
-      <q-btn
+      <q-btn no-caps rounded flat label="Cancel" :to="backRoute" />
+      <q-btn no-caps rounded
         unelevated color="negative" icon="send" label="Submit Report"
         :loading="submitting"
         :disable="incidentItems.length === 0"
@@ -146,7 +135,7 @@
         <div class="text-body2 text-grey-7 q-mb-lg">
           Quantities have been updated for <strong>{{ kit?.name }}</strong>.
         </div>
-        <q-btn unelevated color="primary" label="Back to Kit"
+        <q-btn no-caps rounded unelevated color="primary" label="Back to Dashboard"
           :to="backRoute" />
       </q-card>
     </q-dialog>

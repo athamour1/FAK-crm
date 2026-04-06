@@ -3,7 +3,7 @@
     <div class="row items-center q-mb-md">
       <div class="text-h5"><q-icon name="medical_services" class="q-mr-sm" />Kits</div>
       <q-space />
-      <q-btn color="primary" icon="add" label="New Kit" unelevated @click="openCreate" />
+      <q-btn no-caps rounded color="primary" icon="add" label="New Kit" unelevated @click="openCreate" />
     </div>
 
     <q-card flat bordered>
@@ -39,21 +39,21 @@
 
         <template #body-cell-actions="props">
           <q-td :props="props" class="q-gutter-xs">
-            <q-btn flat dense round icon="open_in_new" color="primary" size="sm"
+            <q-btn no-caps rounded flat dense round icon="open_in_new" color="primary" size="sm"
               :to="`/admin/kits/${props.row.id}`">
               <q-tooltip>View Details</q-tooltip>
             </q-btn>
-            <q-btn flat dense round icon="qr_code" color="purple" size="sm"
+            <q-btn no-caps rounded flat dense round icon="qr_code" color="purple" size="sm"
               @click="openQr(props.row)">
               <q-tooltip>Show QR Code</q-tooltip>
             </q-btn>
-            <q-btn flat dense round icon="person_add" color="teal" size="sm"
+            <q-btn no-caps rounded flat dense round icon="person_add" color="teal" size="sm"
               @click="openAssign(props.row)">
               <q-tooltip>Assign to User</q-tooltip>
             </q-btn>
-            <q-btn flat dense round icon="edit" color="grey-7" size="sm"
+            <q-btn no-caps rounded flat dense round icon="edit" color="grey-7" size="sm"
               @click="openEdit(props.row)" />
-            <q-btn flat dense round icon="delete" color="negative" size="sm"
+            <q-btn no-caps rounded flat dense round icon="delete" color="negative" size="sm"
               @click="confirmDelete(props.row)" />
           </q-td>
         </template>
@@ -65,7 +65,7 @@
       <q-card style="min-width: 400px">
         <q-card-section class="row items-center">
           <div class="text-h6">{{ editTarget ? 'Edit Kit' : 'New Kit' }}</div>
-          <q-space /><q-btn icon="close" flat round dense v-close-popup />
+          <q-space /><q-btn no-caps rounded icon="close" flat round dense v-close-popup />
         </q-card-section>
         <q-separator />
         <q-card-section>
@@ -79,8 +79,8 @@
           </q-form>
         </q-card-section>
         <q-card-actions align="right">
-          <q-btn flat label="Cancel" v-close-popup />
-          <q-btn unelevated color="primary" :label="editTarget ? 'Save' : 'Create'"
+          <q-btn no-caps rounded flat label="Cancel" v-close-popup />
+          <q-btn no-caps rounded unelevated color="primary" :label="editTarget ? 'Save' : 'Create'"
             :loading="saving" @click="saveKit" />
         </q-card-actions>
       </q-card>
@@ -94,7 +94,7 @@
       <q-card style="min-width: 380px">
         <q-card-section class="row items-center">
           <div class="text-h6">Assign Kit</div>
-          <q-space /><q-btn icon="close" flat round dense v-close-popup />
+          <q-space /><q-btn no-caps rounded icon="close" flat round dense v-close-popup />
         </q-card-section>
         <q-separator />
         <q-card-section class="q-gutter-sm">
@@ -112,8 +112,8 @@
           />
         </q-card-section>
         <q-card-actions align="right">
-          <q-btn flat label="Cancel" v-close-popup />
-          <q-btn unelevated color="teal" label="Assign" :loading="saving" @click="saveAssign" />
+          <q-btn no-caps rounded flat label="Cancel" v-close-popup />
+          <q-btn no-caps rounded unelevated color="teal" label="Assign" :loading="saving" @click="saveAssign" />
         </q-card-actions>
       </q-card>
     </q-dialog>

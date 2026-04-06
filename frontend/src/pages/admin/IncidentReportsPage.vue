@@ -22,7 +22,7 @@
         <template #body="props">
           <q-tr :props="props">
             <q-td auto-width>
-              <q-btn flat dense round size="sm"
+              <q-btn no-caps rounded flat dense round size="sm"
                 :icon="props.expand ? 'expand_less' : 'expand_more'"
                 @click="props.expand = !props.expand"
               />

@@ -100,7 +100,7 @@
             Recent Inspections
           </div>
           <q-space />
-          <q-btn flat dense size="sm" label="View all" icon-right="arrow_forward"
+          <q-btn no-caps rounded flat dense size="sm" label="View all" icon-right="arrow_forward"
             to="/admin/inspections" color="primary" />
         </q-card-section>
 
@@ -193,7 +193,7 @@
         </div>
       </div>
 
-      <q-btn
+      <q-btn no-caps rounded
         v-if="myKits.length"
         flat color="primary" label="View all my kits"
         icon-right="arrow_forward" to="/my-kits"
