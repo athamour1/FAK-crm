@@ -215,7 +215,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, type RouteLocationRaw } from 'vue-router';
 import { useQuasar, date } from 'quasar';
 
 const $q = useQuasar();
@@ -225,9 +225,9 @@ import { useNotify } from 'src/composables/useNotify';
 const route = useRoute();
 const notify = useNotify();
 const kitId = route.params.id as string;
-const backRoute = route.query['from'] === 'qr'
+const backRoute: RouteLocationRaw = route.query['from'] === 'qr'
   ? { name: 'dashboard' }
-  : backRoute;
+  : { name: 'my-kit-detail', params: { id: kitId } };
 
 const kit = ref<Kit | null>(null);
 const loading = ref(false);
