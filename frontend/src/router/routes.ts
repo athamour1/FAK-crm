@@ -57,6 +57,14 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true },
       },
 
+      // Profile settings (any authenticated user)
+      {
+        path: 'profile',
+        name: 'profile',
+        component: () => import('pages/ProfilePage.vue'),
+        meta: { requiresAuth: true },
+      },
+
       // ── Admin section ─────────────────────────────────────────────────────────
       {
         path: 'admin',

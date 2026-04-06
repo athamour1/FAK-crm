@@ -120,6 +120,8 @@ export const usersApi = {
   update: (id: string, data: Partial<Pick<User, 'fullName' | 'role' | 'isActive'>> & { password?: string }) =>
     api.patch<User>(`/users/${id}`, data),
   remove: (id: string) => api.delete<User>(`/users/${id}`),
+  updateProfile: (data: { fullName?: string; email?: string; currentPassword?: string; newPassword?: string }) =>
+    api.patch<User>('/users/me', data),
 };
 
 // ── Kits ─────────────────────────────────────────────────────────────────────

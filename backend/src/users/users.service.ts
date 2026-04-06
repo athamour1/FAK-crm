@@ -2,11 +2,13 @@ import {
   Injectable,
   ConflictException,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateProfileDto } from './dto/update-profile.dto';
 
 const SELECT_SAFE = {
   id: true, email: true, fullName: true, role: true,
@@ -50,5 +52,33 @@ export class UsersService {
   async remove(id: string) {
     await this.findOne(id);
     return this.prisma.user.delete({ where: { id }, select: SELECT_SAFE });
+  }
+
+  async updateProfile(id: string, dto: UpdateProfileDto) {
+    // Fetch with password for verification
+    const user = await this.prisma.user.findUnique({ where: { id } });
+    if (!user) throw new NotFoundException('User not found');
+
+    // If changing password, verify current password first
+    if (dto.newPassword) {
+      if (!dto.currentPassword) {
+        throw new UnauthorizedException('Current password is required to set a new password');
+      }
+      const valid = await bcrypt.compare(dto.currentPassword, user.password);
+      if (!valid) throw new UnauthorizedException('Current password is incorrect');
+    }
+
+    // Check email uniqueness if changing email
+    if (dto.email && dto.email !== user.email) {
+      const exists = await this.prisma.user.findUnique({ where: { email: dto.email } });
+      if (exists) throw new ConflictException('Email already in use');
+    }
+
+    const data: Record<string, unknown> = {};
+    if (dto.fullName !== undefined) data['fullName'] = dto.fullName;
+    if (dto.email !== undefined) data['email'] = dto.email;
+    if (dto.newPassword) data['password'] = await bcrypt.hash(dto.newPassword, 12);
+
+    return this.prisma.user.update({ where: { id }, data, select: SELECT_SAFE });
   }
 }

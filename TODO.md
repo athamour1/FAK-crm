@@ -12,4 +12,5 @@
 - [X] search from kit contents should be able to search by name, category, unit, quantity, expiration date, location in kit, notes
 - [X] Add dark mode
 - [X] Change primary color to Red
-- [ ] Add profile settings so the user can change his password or email
+- [X] Add profile settings so the user can change his password or email
+- [ ] Make this app a pwa

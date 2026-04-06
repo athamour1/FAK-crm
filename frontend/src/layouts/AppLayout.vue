@@ -92,6 +92,11 @@
           </div>
         </div>
         <q-btn
+          flat color="primary" icon="manage_accounts" label="Profile Settings"
+          class="full-width q-mb-xs" size="sm" align="left"
+          to="/profile"
+        />
+        <q-btn
           unelevated color="primary" icon="logout" label="Sign Out"
           class="full-width" size="sm"
           @click="handleLogout"

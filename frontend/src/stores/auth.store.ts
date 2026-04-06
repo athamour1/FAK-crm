@@ -68,6 +68,11 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  function setUser(updated: User) {
+    user.value = updated;
+    localStorage.setItem('user', JSON.stringify(updated));
+  }
+
   function clearStorage() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user');
@@ -87,5 +92,6 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     logout,
     refreshUser,
+    setUser,
   };
 });

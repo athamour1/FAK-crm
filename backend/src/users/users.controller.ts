@@ -5,6 +5,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateProfileDto } from './dto/update-profile.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
@@ -34,6 +35,12 @@ export class UsersController {
   @Get('me')
   me(@CurrentUser() user: { id: string }) {
     return this.usersService.findOne(user.id);
+  }
+
+  // Any authenticated user: update their own profile (name, email, password)
+  @Patch('me')
+  updateMe(@CurrentUser() user: { id: string }, @Body() dto: UpdateProfileDto) {
+    return this.usersService.updateProfile(user.id, dto);
   }
 
   // Admin: view any user
