@@ -34,7 +34,7 @@
               <template v-else-if="col.name === 'itemCount'">
                 <q-badge color="negative" :label="props.row.items.length" />
               </template>
-              <template v-else>{{ col.value }}</template>
+              <template v-else-if="col.name !== 'expand'">{{ col.value }}</template>
             </q-td>
           </q-tr>
 
