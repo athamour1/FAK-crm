@@ -27,15 +27,17 @@
                 @click="props.expand = !props.expand"
               />
             </q-td>
-            <q-td v-for="col in props.cols" v-if="col.name !== 'expand'" :key="col.name" :props="props">
-              <template v-if="col.name === 'createdAt'">{{ formatDate(col.value as string) }}</template>
-              <template v-else-if="col.name === 'reporter'">{{ props.row.reportedBy.fullName }}</template>
-              <template v-else-if="col.name === 'kit'">{{ props.row.kit.name }}</template>
-              <template v-else-if="col.name === 'itemCount'">
-                <q-badge color="negative" :label="props.row.items.length" />
-              </template>
-              <template v-else-if="col.name !== 'expand'">{{ col.value }}</template>
-            </q-td>
+            <template v-for="col in props.cols" :key="col.name">
+              <q-td v-if="col.name !== 'expand'" :props="props">
+                <template v-if="col.name === 'createdAt'">{{ formatDate(col.value as string) }}</template>
+                <template v-else-if="col.name === 'reporter'">{{ props.row.reportedBy.fullName }}</template>
+                <template v-else-if="col.name === 'kit'">{{ props.row.kit.name }}</template>
+                <template v-else-if="col.name === 'itemCount'">
+                  <q-badge color="negative" :label="props.row.items.length" />
+                </template>
+                <template v-else>{{ col.value }}</template>
+              </q-td>
+            </template>
           </q-tr>
 
           <q-tr v-show="props.expand" :props="props" :class="$q.dark.isActive ? 'bg-red-10' : 'bg-red-1'">

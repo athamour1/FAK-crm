@@ -47,15 +47,17 @@
                 @click="props.expand = !props.expand"
               />
             </q-td>
-            <q-td v-for="col in props.cols" v-if="col.name !== 'expand'" :key="col.name" :props="props">
-              <template v-if="col.name === 'createdAt'">{{ formatDate(col.value as string) }}</template>
-              <template v-else-if="col.name === 'inspector'">{{ props.row.inspectedBy.fullName }}</template>
-              <template v-else-if="col.name === 'kit'">{{ props.row.kit.name }}</template>
-              <template v-else-if="col.name === 'itemCount'">
-                <q-badge color="primary" :label="props.row.items.length" />
-              </template>
-              <template v-else-if="col.name !== 'expand'">{{ col.value }}</template>
-            </q-td>
+            <template v-for="col in props.cols" :key="col.name">
+              <q-td v-if="col.name !== 'expand'" :props="props">
+                <template v-if="col.name === 'createdAt'">{{ formatDate(col.value as string) }}</template>
+                <template v-else-if="col.name === 'inspector'">{{ props.row.inspectedBy.fullName }}</template>
+                <template v-else-if="col.name === 'kit'">{{ props.row.kit.name }}</template>
+                <template v-else-if="col.name === 'itemCount'">
+                  <q-badge color="primary" :label="props.row.items.length" />
+                </template>
+                <template v-else>{{ col.value }}</template>
+              </q-td>
+            </template>
           </q-tr>
 
           <!-- Expanded items sub-table -->
