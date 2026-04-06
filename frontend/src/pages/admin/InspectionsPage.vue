@@ -54,7 +54,7 @@
               <template v-else-if="col.name === 'itemCount'">
                 <q-badge color="primary" :label="props.row.items.length" />
               </template>
-              <template v-else>{{ col.value }}</template>
+              <template v-else-if="col.name !== 'expand'">{{ col.value }}</template>
             </q-td>
           </q-tr>
 
@@ -116,6 +116,7 @@ function formatDate(iso: string) {
 }
 
 const columns: QTableColumn[] = [
+  { name: 'expand',    label: '',          field: () => '',     align: 'center', style: 'width: 48px' },
   { name: 'createdAt', label: 'Date',      field: 'createdAt',  sortable: true, align: 'left' },
   { name: 'kit',       label: 'Kit',       field: 'kit',        align: 'left' },
   { name: 'inspector', label: 'Inspector', field: 'inspectedBy', align: 'left' },
