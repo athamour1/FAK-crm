@@ -44,6 +44,21 @@ https://athamour1.github.io/fak-crm/
 | Database  | PostgreSQL 16 |
 | Auth      | JWT (Bearer token) + bcrypt |
 | Container | Docker + Docker Compose |
+| PWA       | Workbox `GenerateSW` · Web App Manifest · Service Worker |
+
+---
+
+## Progressive Web App
+
+FAK-CRM is a fully installable PWA:
+
+- **Installable** — browsers show an "Add to Home Screen" / install prompt
+- **Offline resilient** — Workbox `NetworkFirst` strategy caches recent API responses for 5 minutes; static assets are pre-cached at build time
+- **Auto-update** — service worker uses `skipWaiting + clientsClaim`; users are prompted to reload when a new version is available
+- **Theme** — `theme_color: #c62828` (red) applied to browser chrome and mobile status bar
+- **Icons** — medical suitcase icon in all required sizes (128 → 512 px) including maskable for Android adaptive icons
+
+The production nginx config serves `sw.js` with `no-store` headers so the browser always checks for updates, while all other static assets get a 1-year immutable cache.
 
 ---
 
@@ -83,7 +98,7 @@ docker compose -f docker-compose.dev.yml up --build
 | Backend  | http://localhost:3000/api  |
 | Postgres | localhost:5432             |
 
-The backend runs in watch mode (hot-reload). The frontend uses Quasar's HMR dev server.
+The backend runs in watch mode (hot-reload). The frontend runs Quasar's PWA dev server (`quasar dev -m pwa`) with HMR — the service worker is active in dev too.
 
 **Default admin credentials** (seeded on first start):
 
@@ -121,7 +136,7 @@ Pre-built images are published to GitHub Container Registry by `release.sh`:
    IMAGE_TAG=v1.2.0 docker compose -f docker-compose.prod.yml --env-file .env.prod up -d
    ```
 
-The app is available on port **80**. Nginx serves the Quasar SPA and proxies `/api` to the NestJS backend. The database port is not exposed publicly.
+The app is available on port **80**. Nginx serves the Quasar PWA (built with `quasar build -m pwa`) and proxies `/api` to the NestJS backend. The service worker (`sw.js`) is served with `no-store` headers so updates are picked up immediately. The database port is not exposed publicly.
 
 #### Releasing a new version
 

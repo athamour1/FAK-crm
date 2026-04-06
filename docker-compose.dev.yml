@@ -4,7 +4,7 @@
 # Services:
 #   db       — PostgreSQL 16 (persisted via named volume)
 #   backend  — NestJS in watch mode (hot-reload via ts-node + chokidar)
-#   frontend — Quasar Dev Server with HMR
+#   frontend — Quasar PWA Dev Server with HMR (quasar dev -m pwa)
 #
 # Usage:
 #   docker compose -f docker-compose.dev.yml up --build
@@ -74,6 +74,7 @@ services:
       - "9000:9000"
     volumes:
       - ./frontend/src:/app/src             # live-reload source
+      - ./frontend/src-pwa:/app/src-pwa     # PWA manifest & service worker
       - ./frontend/public:/app/public
       - /app/node_modules                   # keep container's node_modules
 

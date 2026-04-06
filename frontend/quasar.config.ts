@@ -156,15 +156,33 @@ export default defineConfig((/* ctx */) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/developing-pwa/configuring-pwa
     pwa: {
-      workboxMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
-      // swFilename: 'sw.js',
-      // manifestFilename: 'manifest.json',
-      // extendManifestJson (json) {},
-      // useCredentialsForManifestTag: true,
-      // injectPwaMetaTags: false,
-      // extendPWACustomSWConf (esbuildConf) {},
-      // extendGenerateSWOptions (cfg) {},
-      // extendInjectManifestOptions (cfg) {}
+      workboxMode: 'GenerateSW',
+      injectPwaMetaTags: true,
+      manifestFilename: 'manifest.json',
+      extendManifestJson (json) {
+        json.name = 'FAK-CRM — First Aid Kit Management';
+        json.short_name = 'FAK-CRM';
+        json.description = 'Manage, inspect, and track first-aid kits across your organisation.';
+        json.display = 'standalone';
+        json.theme_color = '#c62828';
+        json.background_color = '#ffffff';
+        json.start_url = './';
+      },
+      extendGenerateSWOptions (cfg) {
+        cfg.skipWaiting = true;
+        cfg.clientsClaim = true;
+        // Cache the API responses for offline resilience
+        cfg.runtimeCaching = [
+          {
+            urlPattern: /\/api\//,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'api-cache',
+              expiration: { maxEntries: 50, maxAgeSeconds: 300 },
+            },
+          },
+        ];
+      },
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/developing-cordova-apps/configuring-cordova

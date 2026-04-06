@@ -8,7 +8,7 @@
 # Services:
 #   db       — PostgreSQL 16 (persisted via named volume, no host port exposed)
 #   backend  — NestJS compiled image from GHCR, runs migrations on startup
-#   frontend — Quasar SPA + nginx image from GHCR, proxies /api → backend
+#   frontend — Quasar PWA + nginx image from GHCR, proxies /api → backend
 #
 # Before first run:
 #   1. Copy .env.prod.example → .env.prod and fill in secrets
@@ -71,7 +71,7 @@ services:
     expose:
       - "3000"
 
-  # ── Nginx + Quasar SPA ────────────────────────────────────────────────────
+  # ── Nginx + Quasar PWA ───────────────────────────────────────────────────
   frontend:
     image: ghcr.io/athamour1/fak-crm/frontend:${IMAGE_TAG:-latest}
     container_name: fakcrm-frontend

@@ -193,6 +193,15 @@
           <h3 class="feature-title">Responsive UI</h3>
           <p class="feature-description">Works beautifully on desktop and mobile. Inspect kits on the go from any device.</p>
         </div>
+
+        <!-- Feature 10 -->
+        <div class="feature-card fade-up" id="feature-pwa">
+          <div class="feature-icon-wrapper icon-indigo">
+            <span class="material-icons-round">install_mobile</span>
+          </div>
+          <h3 class="feature-title">Installable PWA</h3>
+          <p class="feature-description">Install directly on any device — no app store needed. Works offline with Workbox-powered caching and auto-updates when a new version ships.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -371,12 +380,12 @@
 git clone https://github.com/athamour1/FAK-crm.git
 cd FAK-crm
 
-<span class="code-comment"># Start everything</span>
+<span class="code-comment"># Start everything (PWA dev server + HMR)</span>
 docker compose -f docker-compose.dev.yml up --build</code></pre>
           <div class="start-card-footer">
             <div class="port-badge">
               <span class="material-icons-round">language</span>
-              Frontend → <strong>localhost:9000</strong>
+              Frontend PWA → <strong>localhost:9000</strong>
             </div>
             <div class="port-badge">
               <span class="material-icons-round">api</span>
@@ -393,7 +402,7 @@ docker compose -f docker-compose.dev.yml up --build</code></pre>
           <pre class="code-block"><code><span class="code-comment"># Copy env and configure secrets</span>
 cp .env.prod.example .env.prod
 
-<span class="code-comment"># Pull pre-built images and start</span>
+<span class="code-comment"># Pull pre-built PWA images and start</span>
 docker compose -f docker-compose.prod.yml \
   --env-file .env.prod up -d
 
@@ -404,7 +413,7 @@ IMAGE_TAG=v1.2.0 docker compose \
           <div class="start-card-footer">
             <div class="port-badge">
               <span class="material-icons-round">public</span>
-              App → <strong>port 80</strong> (Nginx)
+              App → <strong>port 80</strong> (Nginx + PWA)
             </div>
             <div class="port-badge">
               <span class="material-icons-round">inventory_2</span>
