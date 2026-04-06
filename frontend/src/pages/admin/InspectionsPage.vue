@@ -14,7 +14,7 @@
       />
     </div>
 
-    <q-card flat bordered>
+    <q-card flat bordered style="overflow: hidden;">
       <q-table
         :rows="logs" :columns="columns" row-key="id"
         :loading="loading" flat :pagination="{ rowsPerPage: 20 }"
@@ -60,7 +60,7 @@
 
           <!-- Expanded items sub-table -->
           <q-tr v-show="props.expand" :props="props" :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-1'">
-            <q-td colspan="100%" style="padding: 0;">
+            <q-td colspan="100%" style="padding: 0; max-width: 0;">
               <div class="q-pa-sm" style="overflow-x: auto;">
                 <div class="text-subtitle2 q-mb-sm text-grey-7">
                   Items inspected — {{ props.row.items.length }} item(s)

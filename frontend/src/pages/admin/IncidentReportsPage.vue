@@ -14,7 +14,7 @@
       />
     </div>
 
-    <q-card flat bordered>
+    <q-card flat bordered style="overflow: hidden;">
       <q-table
         :rows="reports" :columns="columns" row-key="id"
         :loading="loading" flat :pagination="{ rowsPerPage: 20 }"
@@ -39,7 +39,7 @@
           </q-tr>
 
           <q-tr v-show="props.expand" :props="props" :class="$q.dark.isActive ? 'bg-red-10' : 'bg-red-1'">
-            <q-td colspan="100%" style="padding: 0;">
+            <q-td colspan="100%" style="padding: 0; max-width: 0;">
               <div class="q-pa-sm" style="overflow-x: auto;">
                 <div v-if="props.row.description" class="q-mb-sm text-caption text-grey-8">
                   <strong>Description:</strong> {{ props.row.description }}
