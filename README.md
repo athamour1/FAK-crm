@@ -2,6 +2,8 @@
 
 A full-stack web application for managing first-aid kits across an organisation. Admins configure kits and users; checkers inspect kits, record incidents, and track item stock in real time.
 
+https://athamour1.github.io/fak-crm/
+
 ---
 
 ## Features
