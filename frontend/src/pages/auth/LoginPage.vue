@@ -94,15 +94,14 @@ async function handleLogin() {
   const valid = await formRef.value?.validate();
   if (!valid) return;
 
-  try {
-    const user = await authStore.login(email.value, password.value);
-    // Redirect to the originally requested page, or dashboard
-    const redirect = (route.query.redirect as string) ?? '/dashboard';
-    void router.push(redirect);
-    void user; // used to determine redirect in future phases
-  } catch {
-    // error is already set in the store
-  }
+  const success = await authStore.login(email.value, password.value);
+  if (!success) return; // error already set in store, stay on login
+
+  // Redirect to the originally requested page, or dashboard.
+  // Sanitise: only allow internal paths (no protocol, no double-slash).
+  const raw = route.query.redirect as string | undefined;
+  const redirect = raw?.startsWith('/') && !raw.startsWith('//') ? raw : '/dashboard';
+  void router.push(redirect);
 }
 </script>
 

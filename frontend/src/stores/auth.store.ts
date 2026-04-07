@@ -30,7 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   // ── Actions ────────────────────────────────────────────────────────────────
 
-  async function login(email: string, password: string) {
+  async function login(email: string, password: string): Promise<boolean> {
     loading.value = true;
     error.value = null;
     try {
@@ -39,13 +39,13 @@ export const useAuthStore = defineStore('auth', () => {
       user.value = data.user;
       localStorage.setItem('access_token', data.accessToken);
       localStorage.setItem('user', JSON.stringify(data.user));
-      return data.user;
+      return true;
     } catch (err: unknown) {
       const msg =
         (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??
         'Login failed. Please check your credentials.';
       error.value = Array.isArray(msg) ? msg[0] : msg;
-      throw err;
+      return false;
     } finally {
       loading.value = false;
     }
