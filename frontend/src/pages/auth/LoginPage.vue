@@ -2,7 +2,7 @@
   <div class="login-page row items-center justify-center">
     <q-card class="login-card q-pa-lg shadow-5">
       <!-- Logo / branding -->
-      <q-card-section class="text-center q-pb-none">
+      <q-card-section class="text-center q-pb-sm">
         <q-icon name="medical_services" size="56px" color="primary" />
         <div class="text-h5 text-weight-bold q-mt-sm">OuchTracker</div>
         <div class="text-caption text-grey-6">Injury & Kit Tracker</div>
@@ -10,7 +10,7 @@
 
       <!-- Login form -->
       <q-card-section>
-        <q-form ref="formRef" @submit.prevent="handleLogin" class="q-gutter-md">
+        <q-form ref="formRef" @submit.prevent="handleLogin" class="login-form">
           <q-input
             v-model="email"
             type="email"
@@ -116,5 +116,11 @@ async function handleLogin() {
   width: 100%;
   max-width: 420px;
   border-radius: 16px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 </style>
