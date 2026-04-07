@@ -1,8 +1,8 @@
 {
-  "name": "fak-crm-frontend",
+  "name": "ouchtracker-frontend",
   "version": "0.0.1",
-  "description": "First Aid Kit Management System",
-  "productName": "FAK CRM",
+  "description": "Injury & Kit Tracker",
+  "productName": "OuchTracker",
   "author": "Thanos Mourtzoukos <thanosmour.tk@gmail.com>",
   "type": "module",
   "private": true,

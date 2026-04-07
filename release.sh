@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # ─── Configuration ──────────────────────────────────────────────────────────────
-REPO="athamour1/fak-crm"
+REPO="athamour1/ouchtracker"
 REGISTRY="ghcr.io"
 BACKEND_IMAGE="${REGISTRY}/${REPO}/backend"
 FRONTEND_IMAGE="${REGISTRY}/${REPO}/frontend"
@@ -27,7 +27,7 @@ gh auth status    >/dev/null 2>&1 || error "Not logged in to GitHub CLI. Run: gh
 # ─── Ask for version ───────────────────────────────────────────────────────────
 echo ""
 echo -e "${CYAN}═══════════════════════════════════════════════════${NC}"
-echo -e "${CYAN}       🧭 fak-crm Release Script${NC}"
+echo -e "${CYAN}       🩹 OuchTracker Release Script${NC}"
 echo -e "${CYAN}═══════════════════════════════════════════════════${NC}"
 echo ""
 
@@ -107,7 +107,7 @@ ok "Tag ${TAG} pushed"
 info "Creating GitHub release..."
 gh release create "$TAG" \
   --repo "$REPO" \
-  --title "🧭 fak-crm ${TAG}" \
+  --title "🩹 OuchTracker ${TAG}" \
   --generate-notes
 ok "GitHub release created"
 

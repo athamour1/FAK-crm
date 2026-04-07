@@ -113,7 +113,7 @@ const INSPECTION_NOTES = [
 
 async function main() {
   // ── Admin ────────────────────────────────────────────────────────────────────
-  const adminEmail = process.env.SEED_ADMIN_EMAIL ?? 'admin@fakcrm.local';
+  const adminEmail = process.env.SEED_ADMIN_EMAIL ?? 'admin@ouchtracker.local';
   const adminPassword = process.env.SEED_ADMIN_PASSWORD ?? 'Admin1234!';
   let admin = await prisma.user.findUnique({ where: { email: adminEmail } });
   if (!admin) {
@@ -139,26 +139,26 @@ async function main() {
 
   // ── 20 Checker users ─────────────────────────────────────────────────────────
   const checkerDefs = [
-    { fullName: 'Maria Papadaki',     email: 'maria.papadaki@fakcrm.local' },
-    { fullName: 'Nikos Georgiou',     email: 'nikos.georgiou@fakcrm.local' },
-    { fullName: 'Elena Stavrou',      email: 'elena.stavrou@fakcrm.local' },
-    { fullName: 'Dimitris Kostas',    email: 'dimitris.kostas@fakcrm.local' },
-    { fullName: 'Sofia Alexiou',      email: 'sofia.alexiou@fakcrm.local' },
-    { fullName: 'Petros Ioannidis',   email: 'petros.ioannidis@fakcrm.local' },
-    { fullName: 'Anna Theodorou',     email: 'anna.theodorou@fakcrm.local' },
-    { fullName: 'Giorgos Makris',     email: 'giorgos.makris@fakcrm.local' },
-    { fullName: 'Ioanna Vasiliou',    email: 'ioanna.vasiliou@fakcrm.local' },
-    { fullName: 'Kostas Nikolaou',    email: 'kostas.nikolaou@fakcrm.local' },
-    { fullName: 'Chrysa Mpekiari',    email: 'chrysa.mpekiari@fakcrm.local' },
-    { fullName: 'Thanasis Mourtzoukos', email: 'thanasis.mourtzoukos@fakcrm.local' },
-    { fullName: 'Vasia Kontou',       email: 'vasia.kontou@fakcrm.local' },
-    { fullName: 'Lefteris Papadopoulos', email: 'lefteris.papadopoulos@fakcrm.local' },
-    { fullName: 'Katerina Zografou',  email: 'katerina.zografou@fakcrm.local' },
-    { fullName: 'Spyros Alexakis',    email: 'spyros.alexakis@fakcrm.local' },
-    { fullName: 'Theodora Kampos',    email: 'theodora.kampos@fakcrm.local' },
-    { fullName: 'Manolis Daskalakis', email: 'manolis.daskalakis@fakcrm.local' },
-    { fullName: 'Irene Papadimitriou', email: 'irene.papadimitriou@fakcrm.local' },
-    { fullName: 'Alexis Fountoulakis', email: 'alexis.fountoulakis@fakcrm.local' },
+    { fullName: 'Maria Papadaki',     email: 'maria.papadaki@ouchtracker.local' },
+    { fullName: 'Nikos Georgiou',     email: 'nikos.georgiou@ouchtracker.local' },
+    { fullName: 'Elena Stavrou',      email: 'elena.stavrou@ouchtracker.local' },
+    { fullName: 'Dimitris Kostas',    email: 'dimitris.kostas@ouchtracker.local' },
+    { fullName: 'Sofia Alexiou',      email: 'sofia.alexiou@ouchtracker.local' },
+    { fullName: 'Petros Ioannidis',   email: 'petros.ioannidis@ouchtracker.local' },
+    { fullName: 'Anna Theodorou',     email: 'anna.theodorou@ouchtracker.local' },
+    { fullName: 'Giorgos Makris',     email: 'giorgos.makris@ouchtracker.local' },
+    { fullName: 'Ioanna Vasiliou',    email: 'ioanna.vasiliou@ouchtracker.local' },
+    { fullName: 'Kostas Nikolaou',    email: 'kostas.nikolaou@ouchtracker.local' },
+    { fullName: 'Chrysa Mpekiari',    email: 'chrysa.mpekiari@ouchtracker.local' },
+    { fullName: 'Thanasis Mourtzoukos', email: 'thanasis.mourtzoukos@ouchtracker.local' },
+    { fullName: 'Vasia Kontou',       email: 'vasia.kontou@ouchtracker.local' },
+    { fullName: 'Lefteris Papadopoulos', email: 'lefteris.papadopoulos@ouchtracker.local' },
+    { fullName: 'Katerina Zografou',  email: 'katerina.zografou@ouchtracker.local' },
+    { fullName: 'Spyros Alexakis',    email: 'spyros.alexakis@ouchtracker.local' },
+    { fullName: 'Theodora Kampos',    email: 'theodora.kampos@ouchtracker.local' },
+    { fullName: 'Manolis Daskalakis', email: 'manolis.daskalakis@ouchtracker.local' },
+    { fullName: 'Irene Papadimitriou', email: 'irene.papadimitriou@ouchtracker.local' },
+    { fullName: 'Alexis Fountoulakis', email: 'alexis.fountoulakis@ouchtracker.local' },
   ];
 
   const checkers: User[] = [];

@@ -1,6 +1,6 @@
-# FAK CRM (fak-crm-frontend)
+# OuchTracker (ouchtracker-frontend)
 
-First Aid Kit Management System
+Injury & Kit Tracker
 
 ## Install the dependencies
 

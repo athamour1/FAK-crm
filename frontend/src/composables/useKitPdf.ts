@@ -241,7 +241,7 @@ export async function buildBomHtml(kit: Kit, items: KitItem[], isDark = false): 
       <div class="header-logo">+</div>
       <div>
         <div class="header-title">Bill of Materials</div>
-        <div class="header-sub">FAK-CRM · First Aid Kit Management</div>
+        <div class="header-sub">OuchTracker · Injury & Kit Tracker</div>
       </div>
     </div>
     <div class="header-date">
@@ -297,7 +297,7 @@ export async function buildBomHtml(kit: Kit, items: KitItem[], isDark = false): 
   </div>
 
   <div class="footer">
-    <span>FAK-CRM · First Aid Kit Management System</span>
+    <span>OuchTracker · Injury & Kit Tracker</span>
     <span>${kit.name} · ${date.formatDate(new Date(), 'DD MMM YYYY')}</span>
   </div>
 

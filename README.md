@@ -1,8 +1,8 @@
-# FAK-CRM — First Aid Kit Management System
+# OuchTracker — Injury & Kit Tracker
 
 A full-stack web application for managing first-aid kits across an organisation. Admins configure kits and users; checkers inspect kits, record incidents, and track item stock in real time.
 
-https://athamour1.github.io/fak-crm/
+https://athamour1.github.io/ouchtracker/
 
 ---
 
@@ -54,7 +54,7 @@ https://athamour1.github.io/fak-crm/
 
 ## Progressive Web App
 
-FAK-CRM is a fully installable PWA:
+OuchTracker is a fully installable PWA:
 
 - **Installable** — browsers show an "Add to Home Screen" / install prompt
 - **Offline resilient** — Workbox `NetworkFirst` strategy caches recent API responses for 5 minutes; static assets are pre-cached at build time
@@ -108,7 +108,7 @@ The backend runs in watch mode (hot-reload). The frontend runs Quasar's PWA dev 
 
 | Field    | Value                  |
 |----------|------------------------|
-| Email    | `admin@fakcrm.local`   |
+| Email    | `admin@ouchtracker.local`   |
 | Password | `Admin1234!`           |
 
 Override via environment variables before starting:
@@ -121,8 +121,8 @@ docker compose -f docker-compose.dev.yml up --build
 ### Production
 
 Pre-built images are published to GitHub Container Registry by `release.sh`:
-- `ghcr.io/athamour1/fak-crm/backend`
-- `ghcr.io/athamour1/fak-crm/frontend`
+- `ghcr.io/athamour1/ouchtracker/backend`
+- `ghcr.io/athamour1/ouchtracker/frontend`
 
 1. Copy the example env file and fill in secrets:
    ```bash
@@ -156,9 +156,9 @@ The script will:
 #### Required `.env.prod` variables
 
 ```env
-DB_USER=fakcrm
+DB_USER=ouchtracker
 DB_PASSWORD=change_me
-DB_NAME=fakcrm_db
+DB_NAME=ouchtracker_db
 
 JWT_SECRET=change_me_to_a_long_random_string
 JWT_EXPIRES_IN=8h
@@ -179,7 +179,7 @@ IMAGE_TAG=latest
 ## Project Structure
 
 ```
-FAK-crm/
+OuchTracker/
 ├── backend/                  # NestJS API
 │   ├── prisma/
 │   │   ├── schema.prisma     # Data models

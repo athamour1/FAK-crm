@@ -160,8 +160,8 @@ export default defineConfig((/* ctx */) => {
       injectPwaMetaTags: true,
       manifestFilename: 'manifest.json',
       extendManifestJson (json) {
-        json.name = 'FAK-CRM — First Aid Kit Management';
-        json.short_name = 'FAK-CRM';
+        json.name = 'OuchTracker — Injury & Kit Tracker';
+        json.short_name = 'OuchTracker';
         json.description = 'Manage, inspect, and track first-aid kits across your organisation.';
         json.display = 'standalone';
         json.theme_color = '#b14d4d';
@@ -224,7 +224,7 @@ export default defineConfig((/* ctx */) => {
       builder: {
         // https://www.electron.build/configuration
 
-        appId: 'fak-crm-frontend',
+        appId: 'ouchtracker-frontend',
       },
     },
 

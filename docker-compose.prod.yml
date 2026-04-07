@@ -1,9 +1,9 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# FAK-CRM — Production Docker Compose
+# OuchTracker — Production Docker Compose
 #
 # Uses pre-built images published to GitHub Container Registry by release.sh.
-# Images: ghcr.io/athamour1/fak-crm/backend  (tagged :latest or :vX.Y.Z)
-#         ghcr.io/athamour1/fak-crm/frontend  (tagged :latest or :vX.Y.Z)
+# Images: ghcr.io/athamour1/ouchtracker/backend  (tagged :latest or :vX.Y.Z)
+#         ghcr.io/athamour1/ouchtracker/frontend  (tagged :latest or :vX.Y.Z)
 #
 # Services:
 #   db       — PostgreSQL 16 (persisted via named volume, no host port exposed)
@@ -24,14 +24,14 @@
 # The only public-facing port is 80 (frontend + API proxy).
 # ─────────────────────────────────────────────────────────────────────────────
 
-name: fakcrm-prod
+name: ouchtracker-prod
 
 services:
 
   # ── PostgreSQL 16 ─────────────────────────────────────────────────────────
   db:
     image: postgres:16-alpine
-    container_name: fakcrm-db
+    container_name: ouchtracker-db
     restart: always
     env_file:
       - .env.prod
@@ -50,8 +50,8 @@ services:
 
   # ── NestJS Backend ────────────────────────────────────────────────────────
   backend:
-    image: ghcr.io/athamour1/fak-crm/backend:${IMAGE_TAG:-latest}
-    container_name: fakcrm-backend
+    image: ghcr.io/athamour1/ouchtracker/backend:${IMAGE_TAG:-latest}
+    container_name: ouchtracker-backend
     restart: always
     depends_on:
       db:
@@ -64,7 +64,7 @@ services:
       CORS_ORIGIN: ${CORS_ORIGIN}
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-8h}
-      SEED_ADMIN_EMAIL: ${SEED_ADMIN_EMAIL:-admin@fakcrm.local}
+      SEED_ADMIN_EMAIL: ${SEED_ADMIN_EMAIL:-admin@ouchtracker.local}
       SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD}
       SEED_ADMIN_NAME: ${SEED_ADMIN_NAME:-System Admin}
     # backend port is NOT exposed to the host — nginx proxies through Docker network
@@ -73,8 +73,8 @@ services:
 
   # ── Nginx + Quasar PWA ───────────────────────────────────────────────────
   frontend:
-    image: ghcr.io/athamour1/fak-crm/frontend:${IMAGE_TAG:-latest}
-    container_name: fakcrm-frontend
+    image: ghcr.io/athamour1/ouchtracker/frontend:${IMAGE_TAG:-latest}
+    container_name: ouchtracker-frontend
     restart: always
     depends_on:
       - backend

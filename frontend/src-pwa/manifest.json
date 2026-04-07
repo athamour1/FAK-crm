@@ -1,6 +1,6 @@
 {
-  "name": "FAK-CRM — First Aid Kit Management",
-  "short_name": "FAK-CRM",
+  "name": "OuchTracker — Injury & Kit Tracker",
+  "short_name": "OuchTracker",
   "description": "Manage, inspect, and track first-aid kits across your organisation.",
   "start_url": "./",
   "display": "standalone",

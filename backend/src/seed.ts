@@ -1,7 +1,7 @@
 /**
  * Seed — runs after `prisma migrate deploy` on first boot.
  * Env vars:
- *   SEED_ADMIN_EMAIL    (default: admin@fakcrm.local)
+ *   SEED_ADMIN_EMAIL    (default: admin@ouchtracker.local)
  *   SEED_ADMIN_PASSWORD (default: Admin1234!)
  *   SEED_ADMIN_NAME     (default: System Admin)
  */
@@ -15,7 +15,7 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  const adminEmail    = process.env['SEED_ADMIN_EMAIL']    ?? 'admin@fakcrm.local';
+  const adminEmail    = process.env['SEED_ADMIN_EMAIL']    ?? 'admin@ouchtracker.local';
   const adminPassword = process.env['SEED_ADMIN_PASSWORD'] ?? 'Admin1234!';
   const adminName     = process.env['SEED_ADMIN_NAME']     ?? 'System Admin';
 

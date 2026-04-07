@@ -12,7 +12,7 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  const adminEmail = process.env.SEED_ADMIN_EMAIL ?? 'admin@fakcrm.local';
+  const adminEmail = process.env.SEED_ADMIN_EMAIL ?? 'admin@ouchtracker.local';
   const adminPassword = process.env.SEED_ADMIN_PASSWORD;
 
   if (!adminPassword) {

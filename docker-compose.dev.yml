@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# FAK-CRM — Development Docker Compose
+# OuchTracker — Development Docker Compose
 #
 # Services:
 #   db       — PostgreSQL 16 (persisted via named volume)
@@ -10,25 +10,25 @@
 #   docker compose -f docker-compose.dev.yml up --build
 # ─────────────────────────────────────────────────────────────────────────────
 
-name: fakcrm-dev
+name: ouchtracker-dev
 
 services:
 
   # ── PostgreSQL 16 ────────────────────────────────────────────────────────────
   db:
     image: postgres:16-alpine
-    container_name: fakcrm-db-dev
+    container_name: ouchtracker-db-dev
     restart: unless-stopped
     environment:
-      POSTGRES_USER: fakcrm
-      POSTGRES_PASSWORD: fakcrm_dev_pass
-      POSTGRES_DB: fakcrm_db
+      POSTGRES_USER: ouchtracker
+      POSTGRES_PASSWORD: ouchtracker_dev_pass
+      POSTGRES_DB: ouchtracker_db
     ports:
       - "5432:5432"     # expose to host so you can run prisma migrate from the CLI
     volumes:
       - postgres_dev_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U fakcrm -d fakcrm_db"]
+      test: ["CMD-SHELL", "pg_isready -U ouchtracker -d ouchtracker_db"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -38,18 +38,18 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
-    container_name: fakcrm-backend-dev
+    container_name: ouchtracker-backend-dev
     restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy
     environment:
       PORT: 3000
-      DATABASE_URL: postgresql://fakcrm:fakcrm_dev_pass@db:5432/fakcrm_db?schema=public
+      DATABASE_URL: postgresql://ouchtracker:ouchtracker_dev_pass@db:5432/ouchtracker_db?schema=public
       CORS_ORIGIN: http://localhost:9000
       JWT_SECRET: dev_jwt_secret_change_in_prod
       JWT_EXPIRES_IN: 8h
-      SEED_ADMIN_EMAIL: ${SEED_ADMIN_EMAIL:-admin@fakcrm.local}
+      SEED_ADMIN_EMAIL: ${SEED_ADMIN_EMAIL:-admin@ouchtracker.local}
       SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:-Admin1234!}
       SEED_ADMIN_NAME: ${SEED_ADMIN_NAME:-System Admin}
     ports:
@@ -64,7 +64,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    container_name: fakcrm-frontend-dev
+    container_name: ouchtracker-frontend-dev
     restart: unless-stopped
     depends_on:
       - backend

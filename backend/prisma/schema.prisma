@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// FAK-CRM  —  First Aid Kit Management System
+// OuchTracker  —  Injury & Kit Tracker
 // Prisma 7 schema  (connection URL lives in prisma.config.ts)
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -7,7 +7,7 @@
         <q-btn no-caps rounded flat dense round icon="menu" aria-label="Menu" @click="toggleDrawer" />
         <q-toolbar-title class="row items-center gap-sm">
           <q-icon name="medical_services" size="22px" class="q-mr-xs" />
-          FAK CRM
+          OuchTracker
         </q-toolbar-title>
         <q-btn no-caps rounded
           flat dense round
@@ -33,8 +33,8 @@
       <!-- <div class="drawer-brand bg-primary text-white q-pa-md row items-center q-gutter-sm">
         <q-icon name="medical_services" size="28px" />
         <div>
-          <div class="text-subtitle2 text-weight-bold">FAK CRM</div>
-          <div class="text-caption opacity-70">First Aid Kit Management</div>
+          <div class="text-subtitle2 text-weight-bold">OuchTracker</div>
+          <div class="text-caption opacity-70">Injury & Kit Tracker</div>
         </div>
       </div> -->
 

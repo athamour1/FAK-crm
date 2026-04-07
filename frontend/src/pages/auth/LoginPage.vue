@@ -4,8 +4,8 @@
       <!-- Logo / branding -->
       <q-card-section class="text-center q-pb-none">
         <q-icon name="medical_services" size="56px" color="primary" />
-        <div class="text-h5 text-weight-bold q-mt-sm">FAK CRM</div>
-        <div class="text-caption text-grey-6">First Aid Kit Management</div>
+        <div class="text-h5 text-weight-bold q-mt-sm">OuchTracker</div>
+        <div class="text-caption text-grey-6">Injury & Kit Tracker</div>
       </q-card-section>
 
       <!-- Login form -->

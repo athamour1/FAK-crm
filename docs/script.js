@@ -1,4 +1,4 @@
-/* ─── script.js — FAK-CRM Info Site ──────────────────────────────────────── */
+/* ─── script.js — OuchTracker Info Site ──────────────────────────────────────── */
 
 document.addEventListener('DOMContentLoaded', () => {
 
