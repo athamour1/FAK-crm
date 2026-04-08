@@ -26,6 +26,24 @@
 }
 
 
+/* ── Global flat UI (no elevation/shadows) ───────────────────────────────────*/
+
+.q-card,
+.q-toolbar,
+.q-header,
+.q-drawer,
+.q-footer,
+.q-btn:not(.q-btn--flat):not(.q-btn--outline),
+.q-field__control,
+.q-menu,
+.q-dialog__inner > div,
+.q-notification,
+.q-banner,
+.q-table,
+.q-select__dropdown-icon {
+  box-shadow: none !important;
+}
+
 /* ── Global rounded UI ───────────────────────────────────────────────────────*/
 
 /* Cards */

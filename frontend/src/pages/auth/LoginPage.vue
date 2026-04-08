@@ -10,7 +10,7 @@
       <q-tooltip>{{ $q.dark.isActive ? 'Light mode' : 'Dark mode' }}</q-tooltip>
     </q-btn>
 
-    <q-card class="login-card q-pa-lg shadow-5">
+    <q-card class="login-card q-pa-lg">
       <!-- Logo / branding -->
       <q-card-section class="text-center q-pb-sm">
         <q-icon name="medical_services" size="56px" color="primary" />
