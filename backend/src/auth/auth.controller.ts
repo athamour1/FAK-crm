@@ -9,18 +9,35 @@ export class AuthController {
 
   /**
    * POST /api/auth/login
-   * Body: { email, password }
-   * LocalAuthGuard calls LocalStrategy → validateUser; on success req.user is set.
+   * Body: { email, password, stayLoggedIn? }
    */
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Request() req) {
-    return this.authService.login(req.user);
+  login(@Request() req, @Body() body: { stayLoggedIn?: boolean }) {
+    return this.authService.login(req.user, body.stayLoggedIn ?? false);
+  }
+
+  /**
+   * POST /api/auth/refresh
+   * Body: { userId, refreshToken }
+   */
+  @Post('refresh')
+  refresh(@Body() body: { userId: string; refreshToken: string }) {
+    return this.authService.refresh(body.userId, body.refreshToken);
+  }
+
+  /**
+   * POST /api/auth/logout
+   * Invalidates the stored refresh token.
+   */
+  @UseGuards(JwtAuthGuard)
+  @Post('logout')
+  logout(@Request() req) {
+    return this.authService.logout(req.user.id);
   }
 
   /**
    * GET /api/auth/me
-   * Returns the JWT-authenticated user profile.
    */
   @UseGuards(JwtAuthGuard)
   @Get('me')
