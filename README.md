@@ -32,11 +32,15 @@ https://athamour1.github.io/ouchtracker/
 
 ### General
 - **Role-based access control** — JWT-authenticated, `ADMIN` / `CHECKER` roles enforced on every endpoint
-- **Dark mode** — full dark-mode support toggled from the header, preference persisted in `localStorage`
+- **Dark mode** — full dark-mode support toggled from the header and login page, preference persisted in `localStorage`
 - **Expiry tracking** — items flagged as expired or expiring within 30 days with colour-coded indicators
 - **Responsive UI** — works on desktop and mobile; drawer starts closed on mobile
 - **PWA** — installable on any device, offline-resilient via Workbox `NetworkFirst` caching, auto-updates on new deploy
 - **Rounded UI** — consistent rounded buttons, inputs, cards, dialogs, banners and notifications throughout
+- **Stay logged in** — optional "stay logged in" toggle on login; issues a long-lived refresh token (bcrypt-hashed, stored in DB), rotated on every use
+- **Skeleton loading** — Quasar skeleton placeholders on all list/table views while data loads
+- **Internationalisation (i18n)** — full English and Greek (Ελληνικά) translations via vue-i18n v9; language selection saved to the user's profile in the database and restored on login
+- **Profile settings** — users can update their name, email, password, and display language from a dedicated profile page
 
 ---
 
@@ -44,11 +48,11 @@ https://athamour1.github.io/ouchtracker/
 
 | Layer     | Technology |
 |-----------|-----------|
-| Frontend  | Vue 3 · Quasar Framework v2 · TypeScript · Pinia · Vue Router (hash mode) |
+| Frontend  | Vue 3 · Quasar Framework v2 · TypeScript · Pinia · Vue Router · vue-i18n v9 |
 | Backend   | NestJS v11 · TypeScript |
 | ORM       | Prisma 7 (`@prisma/adapter-pg`) |
 | Database  | PostgreSQL 16 |
-| Auth      | JWT (Bearer token) + bcrypt |
+| Auth      | JWT (access token) + refresh token rotation · bcrypt |
 | Container | Docker + Docker Compose |
 | PWA       | Workbox `GenerateSW` · Web App Manifest · Service Worker |
 
@@ -223,8 +227,11 @@ All routes are prefixed with `/api`.
 
 | Method | Path | Role | Description |
 |--------|------|------|-------------|
-| POST | `/auth/login` | Public | Obtain JWT |
-| GET | `/auth/me` | Any | Current user info |
+| POST | `/auth/login` | Public | Obtain JWT (+ optional refresh token) |
+| POST | `/auth/refresh` | Public | Rotate refresh token, return new JWT |
+| POST | `/auth/logout` | Any | Invalidate refresh token |
+| GET | `/auth/me` | Any | Current user info (including locale) |
+| PATCH | `/users/me` | Any | Update own profile (name, email, password, locale) |
 | GET/POST | `/users` | Admin | List / create users |
 | PATCH/DELETE | `/users/:id` | Admin | Update / delete user |
 | GET/POST | `/kits` | Admin | List all / create kit |
