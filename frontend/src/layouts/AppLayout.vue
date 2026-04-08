@@ -95,7 +95,7 @@
 
       <!-- ── User + Logout — pinned to bottom ──────────────────────────────── -->
       <div :class="['drawer-footer q-pa-md', $q.dark.isActive ? 'bg-grey-9' : 'bg-grey-2']">
-        <NavItem icon="manage_accounts" label="Profile Settings" to="/profile" />
+        <NavItem icon="manage_accounts" label="Profile Settings" to="/profile" class="q-mx-none" />
         <q-separator class="q-mb-sm" />
         <div class="row items-center q-mb-sm q-gutter-sm">
           <q-avatar color="primary" text-color="white" size="36px">
