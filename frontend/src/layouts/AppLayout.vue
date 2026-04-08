@@ -140,7 +140,7 @@ const saved = localStorage.getItem('darkMode');
 if (saved !== null) $q.dark.set(saved === 'true');
 
 async function handleLogout() {
-  authStore.logout();
+  await authStore.logout();
   await router.push({ name: 'login' });
 }
 </script>

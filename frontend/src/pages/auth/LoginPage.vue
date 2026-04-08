@@ -10,7 +10,7 @@
 
       <!-- Login form -->
       <q-card-section>
-        <q-form ref="formRef" @submit.prevent="handleLogin" class="login-form">
+        <q-form @submit="handleLogin" class="login-form">
           <q-input
             v-model="email"
             type="email"
@@ -49,16 +49,24 @@
             </template>
           </q-input>
 
+          <!-- Stay logged in -->
+          <q-toggle
+            v-model="stayLoggedIn"
+            label="Stay logged in"
+            color="primary"
+            dense
+          />
+
           <!-- Error banner -->
           <q-banner
-            v-if="authStore.error"
+            v-if="loginError"
             dense
             class="bg-negative text-white text-caption"
           >
             <template #avatar>
               <q-icon name="error_outline" />
             </template>
-            {{ authStore.error }}
+            {{ loginError }}
           </q-banner>
 
           <q-btn no-caps rounded
@@ -88,14 +96,17 @@ const authStore = useAuthStore();
 const email = ref('');
 const password = ref('');
 const showPassword = ref(false);
-const formRef = ref();
+const stayLoggedIn = ref(false);
+const loginError = ref('');
 
 async function handleLogin() {
-  const valid = await formRef.value?.validate();
-  if (!valid) return;
+  loginError.value = '';
 
-  const success = await authStore.login(email.value, password.value);
-  if (!success) return; // error already set in store, stay on login
+  const success = await authStore.login(email.value, password.value, stayLoggedIn.value);
+  if (!success) {
+    loginError.value = authStore.error ?? 'Login failed. Please check your credentials.';
+    return;
+  }
 
   // Redirect to the originally requested page, or dashboard.
   // Sanitise: only allow internal paths (no protocol, no double-slash).
