@@ -203,7 +203,13 @@
         <q-icon name="check_circle" color="positive" size="64px" class="q-mb-md" />
         <div class="text-h6 q-mb-xs">{{ $t('inspections.inspectionSubmitted') }}</div>
         <div class="text-body2 text-grey-7 q-mb-lg">
-          Your inspection for <strong>{{ kit?.name }}</strong> has been saved.
+          <template v-if="offlineQueued">
+            <q-icon name="cloud_off" color="warning" class="q-mr-xs" />
+            {{ $t('offline.queuedSubmission') }}
+          </template>
+          <template v-else>
+            Your inspection for <strong>{{ kit?.name }}</strong> has been saved.
+          </template>
         </div>
         <q-btn no-caps rounded unelevated color="primary" :label="$t('common.backToDashboard')" :to="backRoute" />
       </q-card>
@@ -217,11 +223,15 @@ import { ref, computed, onMounted } from 'vue';
 import { useRoute, type RouteLocationRaw } from 'vue-router';
 import { useQuasar, date } from 'quasar';
 import { useI18n } from 'vue-i18n';
+import { kitsApi, inspectionsApi, type Kit } from 'src/services/api';
+import { useNotify } from 'src/composables/useNotify';
+import { useOnline } from 'src/composables/useOnline';
+import { useSyncQueue } from 'src/stores/sync-queue.store';
 
 const { t } = useI18n();
 const $q = useQuasar();
-import { kitsApi, inspectionsApi, type Kit } from 'src/services/api';
-import { useNotify } from 'src/composables/useNotify';
+const { isOnline } = useOnline();
+const syncQueue = useSyncQueue();
 
 const route = useRoute();
 const notify = useNotify();
@@ -235,6 +245,7 @@ const loading = ref(false);
 const submitting = ref(false);
 const overallNotes = ref('');
 const successDialog = ref(false);
+const offlineQueued = ref(false);
 
 // ── Per-item inspection state ────────────────────────────────────────────────
 
@@ -299,17 +310,32 @@ function formatDate(iso: string) {
 
 async function submitInspection() {
   submitting.value = true;
-  try {
-    await inspectionsApi.submit({
-      kitId,
-      ...(overallNotes.value && { notes: overallNotes.value }),
-      items: items.value.map((i) => ({
-        kitItemId: i.kitItemId,
-        quantityFound: i.quantityFound,
-        expirationDateFound: i.expirationDateFound || null,
-        ...(i.notes && { notes: i.notes }),
-      })),
+  const payload = {
+    kitId,
+    ...(overallNotes.value && { notes: overallNotes.value }),
+    items: items.value.map((i) => ({
+      kitItemId: i.kitItemId,
+      quantityFound: i.quantityFound,
+      expirationDateFound: i.expirationDateFound || null,
+      ...(i.notes && { notes: i.notes }),
+    })),
+  };
+
+  if (!isOnline.value) {
+    syncQueue.enqueue({
+      type: 'inspection',
+      id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
+      ...payload,
     });
+    offlineQueued.value = true;
+    successDialog.value = true;
+    submitting.value = false;
+    return;
+  }
+
+  try {
+    await inspectionsApi.submit(payload);
     successDialog.value = true;
   } catch (e) {
     notify.error(e, t('inspections.submitInspection'));
@@ -327,7 +353,7 @@ onMounted(async () => {
     kit.value = data;
     buildItems(data);
   } catch (e) {
-    notify.error(e, 'Failed to load kit');
+    notify.error(e, !isOnline.value ? t('offline.noCachedData') : 'Failed to load kit');
   } finally {
     loading.value = false;
   }
