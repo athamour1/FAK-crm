@@ -173,6 +173,13 @@ export default defineConfig((/* ctx */) => {
       extendGenerateSWOptions (cfg) {
         cfg.skipWaiting = true;
         cfg.clientsClaim = true;
+
+        // Serve index.html for all navigation requests so that deep links
+        // (e.g. /admin/kits, /my-kits/123/inspect) work offline.
+        // API calls are excluded so fetch errors surface normally.
+        cfg.navigateFallback = '/index.html';
+        cfg.navigateFallbackDenylist = [/^\/api\//];
+
         cfg.runtimeCaching = [
           // Kits — long-lived so offline inspection/incident forms can load kit data
           {

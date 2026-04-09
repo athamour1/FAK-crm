@@ -139,7 +139,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
@@ -148,6 +148,7 @@ import { usePwaInstall } from 'src/composables/usePwaInstall';
 import { useOnline } from 'src/composables/useOnline';
 import { useSyncQueue } from 'src/stores/sync-queue.store';
 import { useNotify } from 'src/composables/useNotify';
+import { prewarmCache } from 'src/composables/useDataPrewarm';
 import NavItem from 'components/NavItem.vue';
 
 const { t } = useI18n();
@@ -159,17 +160,36 @@ const { isOnline } = useOnline();
 const syncQueue = useSyncQueue();
 const notify = useNotify();
 
-// Auto-flush queued submissions when connectivity returns
+// Auto-flush queued submissions and refresh cache when connectivity returns
 watch(isOnline, async (online) => {
-  if (!online || !syncQueue.hasPending) return;
-  const { submitted, failed } = await syncQueue.flush();
-  if (submitted > 0 && failed === 0) {
-    notify.success(t('offline.syncSuccess', { n: submitted }));
-  } else if (submitted > 0 && failed > 0) {
-    notify.success(t('offline.syncPartial', { n: submitted, f: failed }));
-  } else if (failed > 0) {
-    notify.error(null, t('offline.syncPartial', { n: 0, f: failed }));
+  if (!online) return;
+  if (syncQueue.hasPending) {
+    const { submitted, failed } = await syncQueue.flush();
+    if (submitted > 0 && failed === 0) {
+      notify.success(t('offline.syncSuccess', { n: submitted }));
+    } else if (submitted > 0 && failed > 0) {
+      notify.success(t('offline.syncPartial', { n: submitted, f: failed }));
+    } else if (failed > 0) {
+      notify.error(null, t('offline.syncPartial', { n: 0, f: failed }));
+    }
   }
+  void prewarmCache(authStore.isAdmin);
+});
+
+// Pre-warm on mount and whenever the tab becomes visible again
+function onVisibilityChange() {
+  if (document.visibilityState === 'visible' && isOnline.value) {
+    void prewarmCache(authStore.isAdmin);
+  }
+}
+
+onMounted(() => {
+  if (isOnline.value) void prewarmCache(authStore.isAdmin);
+  document.addEventListener('visibilitychange', onVisibilityChange);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('visibilitychange', onVisibilityChange);
 });
 
 const { isInstallable, install } = usePwaInstall();
