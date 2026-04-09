@@ -24,9 +24,9 @@
 - [X] add stay loged in togle switch on login and logic localstorage refresh token 
 - [X] add i18n
 - [X] move profile settings abobe the user on on drawer
-- [ ] add offline capabilities for installed pwa and sync when online
-  - [ ] keep users and kits for admins localy and refresh them when online (when offline just show the users and kits dont let the admin edit it only through a inspection report and an incident reort)
-  - [ ] allow users to make inspections and incididents and sync when online
+- [X] add offline capabilities for installed pwa and sync when online
+  - [X] keep users and kits for admins localy and refresh them when online (when offline just show the users and kits dont let the admin edit it only through a inspection report and an incident reort)
+  - [X] allow users to make inspections and incididents and sync when online
 - [X] add dark mode button on login page
 - [X] make the ui flat
 - [X] Add scafolding until the data loads
