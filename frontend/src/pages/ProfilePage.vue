@@ -43,6 +43,7 @@
                 icon="save"
                 type="submit"
                 :loading="savingInfo"
+                :disable="!isOnline"
               />
             </div>
           </q-form>
@@ -119,6 +120,7 @@
                 icon="key"
                 type="submit"
                 :loading="savingPw"
+                :disable="!isOnline"
               />
             </div>
           </q-form>
@@ -157,12 +159,14 @@ import { useI18n } from 'vue-i18n';
 import { usersApi } from 'src/services/api';
 import { useAuthStore } from 'stores/auth.store';
 import { useNotify } from 'src/composables/useNotify';
+import { useOnline } from 'src/composables/useOnline';
 import { LOCALES, type Locale } from 'src/i18n';
 import { i18n } from 'src/boot/i18n';
 
 const { t } = useI18n();
 const authStore = useAuthStore();
 const notify = useNotify();
+const { isOnline } = useOnline();
 
 const localeOptions = LOCALES.map((l) => ({ label: `${l.flag}  ${l.label}`, value: l.value }));
 

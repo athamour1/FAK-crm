@@ -67,6 +67,16 @@
             dense
           />
 
+          <!-- Offline notice -->
+          <q-banner
+            v-if="!isOnline"
+            dense
+            class="bg-orange-2 text-orange-9 text-caption"
+          >
+            <template #avatar><q-icon name="cloud_off" /></template>
+            {{ $t('offline.banner') }}
+          </q-banner>
+
           <!-- Error banner -->
           <q-banner
             v-if="loginError"
@@ -100,9 +110,11 @@ import { useRouter, useRoute } from 'vue-router';
 import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from 'stores/auth.store';
+import { useOnline } from 'src/composables/useOnline';
 
 const { t } = useI18n();
 const $q = useQuasar();
+const { isOnline } = useOnline();
 
 function toggleDark() {
   $q.dark.toggle();
