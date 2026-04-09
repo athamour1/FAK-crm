@@ -17,6 +17,13 @@
           <q-tooltip>{{ $q.dark.isActive ? $t('theme.lightMode') : $t('theme.darkMode') }}</q-tooltip>
         </q-btn>
 
+        <!-- Offline badge -->
+        <q-badge v-if="!isOnline" color="grey-7" class="q-mr-sm">
+          <q-icon name="cloud_off" size="12px" class="q-mr-xs" />
+          offline
+          <q-badge v-if="syncQueue.pendingCount > 0" floating color="warning" :label="syncQueue.pendingCount" />
+        </q-badge>
+
         <!-- PWA install button — only shown when installable -->
         <q-btn no-caps rounded
           v-if="isInstallable"
@@ -37,14 +44,6 @@
           <q-btn no-caps rounded flat dense round icon="close" color="white" @click="dismissBanner" />
         </div>
       </transition>
-
-      <!-- Offline bar -->
-      <div v-if="!isOnline" class="offline-bar row items-center q-px-md q-py-xs">
-        <q-icon name="cloud_off" size="16px" class="q-mr-sm" />
-        <span class="text-caption">{{ $t('offline.banner') }}</span>
-        <q-space />
-        <q-badge v-if="syncQueue.pendingCount > 0" color="warning" :label="`${syncQueue.pendingCount} pending`" />
-      </div>
     </q-header>
 
     <!-- ── Left drawer / sidebar ─────────────────────────────────────────────── -->
@@ -208,12 +207,6 @@ async function handleLogout() {
 <style scoped lang="css">
 .install-banner {
   background: rgba(0, 0, 0, 0.25);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-.offline-bar {
-  background: rgba(180, 70, 0, 0.88);
-  color: white;
-  min-height: 30px;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
